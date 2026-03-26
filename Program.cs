@@ -3,46 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
+using ExpenseTracker.Data;
+using ExpenseTracker.Records;
+
 namespace ExpenseTracker;
-
-public class Expense
-{
-    public int Id { get; set; }
-    public DateOnly Date { get; set; }
-    public string Description { get; set; } = "";
-    public int Amount { get; set; }
-    public string Currency { get; set; } = "$";
-
-    public Expense() {}
-
-    public void SetData(int id, DateOnly date, string description, int amount)
-    {
-        Id = id;
-        Date = date;
-        Description = description;
-        Amount = amount;
-    }
-
-    public string ReturnDate()
-    {
-        return Date.ToString("yyyy-MM-dd");
-    }
-
-    public override string ToString()
-    {
-        return $"{Id},{ReturnDate()},{Description},{Currency}{Amount}";
-    }
-
-}
-
-record HeaderNames
-{
-    public const string
-        idHeader = "id",
-        dateHeader = "date",
-        descriptionHeader = "description",
-        amountHeader = "amount";
-}
 
 class Program
 {
@@ -92,7 +56,7 @@ class Program
         {
             parsedLines = [.. line.Split(',')];
 
-            Expense expenseObj = new();
+            ExpenseData expenseObj = new();
 
             try
             {
